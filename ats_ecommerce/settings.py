@@ -78,11 +78,11 @@ AUTH_USER_MODEL =  'accounts.Account'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ats-ecommerce',
-        'USER': 'postgres',
-        'PASSWORD': os.getenv("DB_PASS"),
-        'HOST': 'localhost',
-        'PORT': '5432'
+        'NAME': 'dfkicfnnqifflt',
+        'USER': 'jywlfcldcpznzh',
+        'PASSWORD': "fcb94e88d7717af566f5c3b29fe074b93dd3a3a568b0fa3ad7f7dc07fd319af1",
+        'HOST': 'ec2-44-210-36-247.compute-1.amazonaws.com',
+        'PORT': 5432
     }
 }
 
