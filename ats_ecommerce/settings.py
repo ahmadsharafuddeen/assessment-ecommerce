@@ -81,8 +81,8 @@ DATABASES = {
         'NAME': 'ats-ecommerce',
         'USER': 'postgres',
         'PASSWORD': os.getenv("DB_PASS"),
-        'HOST': 'localhost',
-        'PORT': 5432
+        'HOST': 'postgres://jywlfcldcpznzh:fcb94e88d7717af566f5c3b29fe074b93dd3a3a568b0fa3ad7f7dc07fd319af1@ec2-44-210-36-247.compute-1.amazonaws.com:5432/dfkicfnnqifflt',
+        'PORT': '5432'
     }
 }
 
