@@ -15,6 +15,7 @@ from accounts.forms import RegistrationForm
 from accounts.models import Account
 from carts.models import Cart, CartItem
 from carts.views import _cart_id
+from category.models import Category
 
 
 class RegisterUserView(View):
@@ -50,7 +51,7 @@ class RegisterUserView(View):
             to_email = email
             send_email = EmailMessage(mail_subject, message, to=[to_email])
             send_email.send()
-            return HttpResponse(user)
+            return redirect(f"/accounts/login?command=verification&email={email}")
         else:
             if form.non_field_errors():
                 messages.error(request, "Password does not match!")
@@ -81,7 +82,10 @@ class ActivateUserView(View):
 
 class UserLoginView(View):
     def get(self, request):
-        return render(request, "accounts/login.html")
+        context = {
+            "categories": Category.objects.all()
+        }
+        return render(request, "accounts/login.html", context)
 
     def post(self, request):
         email = request.POST["email"]
@@ -134,12 +138,15 @@ class UserLoginView(View):
                     nextPage = params["next"]
                     return redirect(nextPage)
             except:
-                return redirect("dashboard")
+                return redirect("home")
         else:
             messages.error(request, "Invalid login credentials")
             return redirect("accounts:login")
 
-        return render(request, "accounts/login.html")
+        context = {
+            "categories": Category.objects.all()
+        }
+        return render(request, "accounts/login.html", context)
 
 
 class ForgotPasswordView(View):

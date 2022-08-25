@@ -18,54 +18,36 @@
                     </div>
                     <ul>
                         <li class="active menu-item-has-children">
-                            <a href="javascript:void(0);">Home</a>
-                            <ul class="sub-menu">
-                                <li><a href="index.html">Home One</a></li>
-                                <li><a href="index2.html">Home Two</a></li>
-                            </ul>
+                            <a href="{% url "home" %}">Home</a>
                         </li>
                         <li class="menu-item-has-children">
-                            <a href="javascript:void(0);">Shop</a>
+                            <a href="javascript:void(0);">Categories</a>
                             <ul class="sub-menu">
-                                <li><a href="shop-fullwidth.html">Shop Fullwidth</a></li>
-                                <li><a href="shop-left-sidebar.html">Shop Left Sidebar</a></li>
-                                <li><a href="shop-right-sidebar.html">Shop Right Sidebar</a></li>
-                                <li><a href="single-product.html">Shop Details</a></li>
-                                <li><a href="cart.html">Cart Page</a></li>
-                                <li><a href="checkout.html">Checkout Page</a></li>
-                                <li><a href="wishlist.html">Wishlist Page</a></li>
+                                <li><a href="{% url "store:store" %}">All</a></li>
+                                {% for category in categories %}
+                                    <li>
+                                        <a href="{% url "store:products_by_category" category.slug %}">{{ category.category_name }}</a>
+                                    </li>
+                                {% endfor %}
                             </ul>
                         </li>
-                        <li class="menu-item-has-children">
-                            <a href="javascript:void(0);">Pages</a>
-                            <ul class="sub-menu">
-                                <li><a href="about.html">About Page</a></li>
-                                <li><a href="newsletter.html">Newsletter Page</a></li>
-                                <li><a href="login-register.html">Login Register Page</a></li>
-                                <li><a href="404.html">404 Page</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu-item-has-children">
-                            <a href="javascript:void(0);">News</a>
-                            <ul class="sub-menu">
-                                <li><a href="blog-right-sidebar.html">News Right Sidebar</a></li>
-                                <li><a href="blog-left-sidebar.html">News Left Sidebar</a></li>
-                                <li><a href="blog-fullwidth.html">News Full Width</a></li>
-                                <li><a href="blog-details.html">News Details</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="{% url "store:store" %}">Store</a></li>
+                        <li><a href="{% url "contact" %}">Contact</a></li>
                     </ul>
                 </nav>
             </div>
             <div class="col-lg-4 col-md-4">
                 <div class="header-cogs">
                     <a class="search search-toggles" href="javascript:void(0);"><i class="twi-search"></i></a>
-                    <a class="select-country" href="javascript:void(0);"><img src="{% static "images/flag.png" %}"
-                                                                              alt=""/>Eng</a>
-                    <a class="select-currency" href="javascript:void(0);"><i class="twi-dollar-sign"></i>Usd</a>
-                    <a class="user-login" href="javascript:void(0);"><i class="twi-user-circle"></i><span>Account</span></a>
-                    <a class="carts" href="javascript:void(0);"><span>4</span><img src="{% static "images/cart.png" %}" alt=""></a>
+                    {% if request.user.is_authenticated %}
+                        <a class="user-login" href="#">Dashboard</a>
+                        <a class="user-login" href="{% url "accounts:logout" %}">Logout</a>
+                        <a class="user-login" href="#">{{ request.user.username }}</a>
+                        <a class="carts" href="{% url "carts:cart" %}"><span>{{ cart_count }}</span><img src="{% static "images/cart.png" %}" alt=""></a>
+                    {% else %}
+                        <a class="user-login" href="{% url "accounts:logout" %}">login</a>
+                        <a class="carts" href="{% url "carts:cart" %}"><span>{{ cart_count }}</span><img src="{% static "images/cart.png" %}" alt=""></a>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -80,8 +62,8 @@
         <a href="javascript:void(0);" class="search-closer">x</a><!-- Close Popup Btn -->
         <div class="middle-search">
             <div class="popup-search-form"><!-- Search Form Start -->
-                <form method="get" action="#">
-                    <input type="search" name="s" id="s" placeholder="Search...">
+                <form method="get" action="{% url "store:search" %}">
+                    <input type="search" name="keyword" id="s" placeholder="Search...">
                     <button type="submit"><i class="twi-search"></i></button>
                 </form><!-- Search Form End -->
             </div>

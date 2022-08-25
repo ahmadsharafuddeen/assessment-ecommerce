@@ -1,0 +1,233 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Product Detail
+{% endblock %}
+
+
+{% block content %}
+    <!-- Banner Start -->
+    <section class="page-banner">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <span class="round-shape"></span>
+                    <h2 class="banner-title">Shop</h2>
+                    <div class="bread-crumb"><a href="{% url "home" %}">Home</a> /
+                        <a href="{% url "store:store" %}">Products</a> /
+                        <a href="{% url "store:products_by_category" product.category.slug %}">{{ product.category }}</a> /
+                        {{ product.product_name }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Banner End -->
+
+    <!-- Shop Section Start -->
+    <section class="single-product-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 col-md-12">
+                    <div id="product-slider" class="carousel slide product-slider" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="ps-img">
+                                    <img src="{{ product.image.url }}" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5 col-md-12">
+                    <div class="sin-product-details">
+                        <h3>{{ product.product_name }}</h3>
+                        <div class="woocommerce-product-rating">
+                            <div class="star-rating">
+                                <i class="twi-star"></i>
+                                <i class="twi-star"></i>
+                                <i class="twi-star"></i>
+                                <i class="twi-star"></i>
+                                <span>
+                                        <i class="twi-star"></i>
+                                    </span>
+                            </div>
+                            <a href="#" class="woocommerce-review-link"><span class="count">03</span> customer reviews
+                            </a>
+                        </div>
+                        <div class="product-price clearfix">
+                                <span class="price">
+                                    <span><span class="woocommerce-Price-currencySymbol">₦</span>{{ product.price }}.00</span>
+                                </span>
+                        </div>
+                        <div class="pro-excerp">
+                            <p>
+                                {{ product.description }}
+                            </p>
+                        </div>
+                        <div class="product-color">
+                            <h5>Color</h5>
+                            <div class="color-1"></div>
+                            <div class="color-2"></div>
+                            <div class="color-3"></div>
+                        </div>
+                        <div class="product-size">
+                            <h5>Size:</h5>
+                            <div class="size-wrapper">
+                                <div class="size-btn clearfix">
+                                    <input type="radio" id="x" name="size" value="x">
+                                    <label for="x">x</label>
+                                </div>
+                                <div class="size-btn clearfix">
+                                    <input type="radio" id="xr" name="size" value="xr">
+                                    <label for="xr">XR</label>
+                                </div>
+                                <div class="size-btn clearfix">
+                                    <input checked="checked" type="radio" id="xs" name="size" value="xs">
+                                    <label for="xs">xs</label>
+                                </div>
+                                <div class="size-btn clearfix">
+                                    <input type="radio" id="xm" name="size" value="xm">
+                                    <label for="xm">xm</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-cart-qty">
+                            <div class="quantityd clearfix">
+                                <button class="qtyBtn btnMinus"><span>-</span></button>
+                                <input name="qty" value="1" title="Qty" class="input-text" type="text">
+                                <button class="qtyBtn btnPlus">+</button>
+                            </div>
+                            <a href="{% url "carts:add_cart" product.id %}" class="add-to-cart-btn">Add To Cart</a>
+                            <a href="#" class="Whislist"><i class="twi-heart"></i></a>
+                            <a href="#" class="compare"><i class="twi-random"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="divider"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-md-8">
+                    <div class="product-tabarea">
+                        <ul class="nav nav-tabs productTabs" id="productTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="descriptions-tab" data-toggle="tab" href="#descriptions"
+                                   role="tab" aria-controls="descriptions" aria-selected="true">Description</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="reviews-tab" data-toggle="tab" href="#reviews" role="tab"
+                                   aria-controls="reviews" aria-selected="false">Reviews (2)</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="productTabContent">
+                            <div class="tab-pane fade show active" id="descriptions" role="tabpanel"
+                                 aria-labelledby="descriptions-tab">
+                                <div class="descriptionContent">
+                                    <p>{{ product.description }}</p>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="descriptions-tab">
+                                <div class="comment-area">
+                                    <h4 class="comment-title">2 Reviews to “Gaming Controller”</h4>
+                                    <ol class="comment-list">
+                                        <li>
+                                            <div class="single-comment">
+                                                <img src="assets/images/blog/c1.jpg" alt="">
+                                                <h5><a href="#">Jason Statham</a><span>July 06th, 2017</span></h5>
+                                                <div class="comment">
+                                                    <p>
+                                                        sapien lorem et tristique nulla lectus fauc-ibus est
+                                                        Pellentesque dapibus
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="single-comment">
+                                                <img src="assets/images/blog/c1.jpg" alt="">
+                                                <h5><a href="#">Jason Statham</a><span>July 06th, 2017</span></h5>
+                                                <div class="comment">
+                                                    <p>
+                                                        Proin vitae dignissim enim, a iaculis sapien. nisi et dignissim
+                                                        efficitur
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ol>
+                                    <div class="comment-form-wrapper">
+                                        <h5>Add Reivew</h5>
+                                        <form action="#" method="post" class="row comment-form">
+                                            <div class="col-lg-6 col-md-6">
+                                                <input type="text" name="name" placeholder="Name">
+                                            </div>
+                                            <div class="col-lg-6 col-md-6">
+                                                <input type="email" name="email" placeholder="Email">
+                                            </div>
+                                            <div class="col-lg-12 col-md-12">
+                                                <textarea name="message" placeholder="Reviews"></textarea>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12">
+                                                <input type="submit" name="submit" value="Submit Review">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <div class="product-speciality">
+                        <h5>Specifications</h5>
+                        <ul>
+                            <li>5.5 “ screen size</li>
+                            <li>170 x 80 x15 cm</li>
+                            <li>IOS 13 pre -installed</li>
+                            <li>3 Cameras Installed</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="related-product-area">
+                        <h3>Related Products</h3>
+                        <div class="related-slider owl-carousel">
+                            {% for product in similar_products %}
+                            <div class="single-shop-product">
+                                <div class="sp-thumb">
+                                    <img src="{{ product.image.url }}" alt="" class="">
+                                    <div class="pro-badge">
+                                        <p class="sale">Sale</p>
+                                    </div>
+                                </div>
+                                <div class="sp-details">
+                                    <h4>{{ product.product_name }}</h4>
+                                    <div class="product-price clearfix">
+                                            <span class="price">
+                                                <del><span><span class="woocommerce-Price-currencySymbol">₦</span>{{ product.price|add:"-5" }}.00</span></del>
+                                                <ins><span><span class="woocommerce-Price-currencySymbol">₦</span>{{ product.price }}.00</span></ins>
+                                            </span>
+                                    </div>
+                                    <div class="sp-details-hover">
+                                        <a class="sp-cart" href="{% url "carts:add_cart" product.id %}"><i
+                                                class="twi-cart-plus"></i><span>Add to cart</span></a>
+                                        <a class="sp-wishlist" href="#"><i class="twi-heart2"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Shop Section End -->
+{% endblock %}

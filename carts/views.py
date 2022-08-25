@@ -69,7 +69,7 @@ def add_cart(request, product_id):
                 cart_item.variations.add(*product_variation)
             cart_item.save()
 
-        return redirect('cart')
+        return redirect('carts:cart')
     # if user is not authenticated
     else:
         product_variation = []
@@ -135,7 +135,7 @@ def add_cart(request, product_id):
                 cart_item.variations.add(*product_variation)
             cart_item.save()
 
-        return redirect('cart')
+        return redirect('carts:cart')
 
 
 def remove_cart_item(request, product_id, cart_item_id):
@@ -149,7 +149,7 @@ def remove_cart_item(request, product_id, cart_item_id):
         cart_item.delete()
     except:
         pass
-    return redirect("cart")
+    return redirect("carts:cart")
 
 
 def remove_cart(request, product_id, cart_item_id):
@@ -167,7 +167,7 @@ def remove_cart(request, product_id, cart_item_id):
             cart_item.delete()
     except:
         pass
-    return redirect("cart")
+    return redirect("carts:cart")
 
 
 def cart(request, total=0, quantity=0, cart_items=None):
@@ -198,7 +198,7 @@ def cart(request, total=0, quantity=0, cart_items=None):
     return render(request, "store/cart.html", context)
 
 
-@login_required(login_url="login")
+@login_required(login_url="accounts:login")
 def checkout(request, total=0, quantity=0, cart_items=None):
     tax = 0
     grand_total = 0

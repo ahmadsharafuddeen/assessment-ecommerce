@@ -12,8 +12,8 @@
             <div class="row">
                 <div class="col-md-12">
                     <span class="round-shape"></span>
-                    <h2 class="banner-title">Have a Great Shoping Experience</h2>
-                    <div class="bread-crumb"><a href="i{% url "home" %}">Home</a> / shop</div>
+                    <h2 class="banner-title">Have a Great Shopping Experience</h2>
+                    <div class="bread-crumb"><a href="i{% url "home" %}">Home</a> / Popular products</div>
                     <div class="banner-img">
                         <img src="{% static "images/shop/banner.png" %}" alt="">
                     </div>
@@ -26,299 +26,35 @@
     <!-- Shop Section Start -->
     <section class="shop-fullwidth">
         <div class="container-fluid">
-            {% include "includes/categories_nav.html" %}
+{#            {% include "includes/categories_nav.html" %}#}
             <div class="row">
+                {% for product in products %}
                 <div class="col-lg-3 col-md-6">
                     <div class="single-shop-product">
                         <div class="sp-thumb">
-                            <img src="{% static "images/shop/9.jpg" %}" alt="" class="">
+                            <a href="{{ product.get_absolute_url }}"><img src="{{ product.image.url }}" alt="" class=""></a>
                             <div class="pro-badge">
                                 <p class="sale">Sale</p>
                             </div>
                         </div>
                         <div class="sp-details">
-                            <h4>Gaming Headset</h4>
+                            <h4>{{ product.product_name }}</h4>
                             <div class="product-price clearfix">
                                     <span class="price">
                                         <del><span><span
-                                                class="woocommerce-Price-currencySymbol">$</span>42.00</span></del>
+                                                class="woocommerce-Price-currencySymbol">₦</span>{{ product.price|add:"-5" }}.00</span></del>
                                         <ins><span><span
-                                                class="woocommerce-Price-currencySymbol">$</span>38.00</span></ins>
+                                                class="woocommerce-Price-currencySymbol">₦</span>{{ product.price }}..</span></ins>
                                     </span>
                             </div>
                             <div class="sp-details-hover">
-                                <a class="sp-cart" href="#"><i class="twi-cart-plus"></i><span>Add to cart</span></a>
+                                <a class="sp-cart" href="{% url "carts:add_cart" product.id %}"><i class="twi-cart-plus"></i><span>Add to cart</span></a>
                                 <a class="sp-wishlist" href="#"><i class="twi-heart2"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="single-shop-product">
-                        <div class="sp-thumb">
-                            <img src="{% static "images/shop/5.jpg" %}" alt="" class="">
-                            <div class="pro-badge">
-                                <p class="hot">Hot</p>
-                            </div>
-                        </div>
-                        <div class="sp-details">
-                            <h4>VRBOX Gaming</h4>
-                            <div class="product-price clearfix">
-                                    <span class="price">
-                                        <del><span><span
-                                                class="woocommerce-Price-currencySymbol">$</span>42.00</span></del>
-                                        <ins><span><span
-                                                class="woocommerce-Price-currencySymbol">$</span>38.00</span></ins>
-                                    </span>
-                            </div>
-                            <div class="sp-details-hover">
-                                <a class="sp-cart" href="#"><i class="twi-cart-plus"></i><span>Add to cart</span></a>
-                                <a class="sp-wishlist" href="#"><i class="twi-heart2"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="single-shop-product">
-                        <div class="sp-thumb">
-                            <img src="{% static "images/shop/1.jpg" %}" alt="" class="">
-                        </div>
-                        <div class="sp-details">
-                            <h4>Gaming Mouse</h4>
-                            <div class="product-price clearfix">
-                                    <span class="price">
-                                        <del><span><span
-                                                class="woocommerce-Price-currencySymbol">$</span>42.00</span></del>
-                                        <ins><span><span
-                                                class="woocommerce-Price-currencySymbol">$</span>38.00</span></ins>
-                                    </span>
-                            </div>
-                            <div class="sp-details-hover">
-                                <a class="sp-cart" href="#"><i class="twi-cart-plus"></i><span>Add to cart</span></a>
-                                <a class="sp-wishlist" href="#"><i class="twi-heart2"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="single-shop-product">
-                        <div class="sp-thumb">
-                            <img src="{% static "images/shop/2.jpg" %}" alt="">
-                        </div>
-                        <div class="sp-details">
-                            <h4>Gaming Controller</h4>
-                            <div class="product-price clearfix">
-                                    <span class="price">
-                                        <del><span><span
-                                                class="woocommerce-Price-currencySymbol">$</span>42.00</span></del>
-                                        <ins><span><span
-                                                class="woocommerce-Price-currencySymbol">$</span>38.00</span></ins>
-                                    </span>
-                            </div>
-                            <div class="sp-details-hover">
-                                <a class="sp-cart" href="#"><i class="twi-cart-plus"></i><span>Add to cart</span></a>
-                                <a class="sp-wishlist" href="#"><i class="twi-heart2"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="single-shop-product">
-                        <div class="sp-thumb">
-                            <img src="{% static "images/shop/10.jpg" %}" alt="" class="">
-                            <div class="pro-badge">
-                                <p class="sale">Sale</p>
-                            </div>
-                        </div>
-                        <div class="sp-details">
-                            <h4>Gaming Headset</h4>
-                            <div class="product-price clearfix">
-                                    <span class="price">
-                                        <del><span><span
-                                                class="woocommerce-Price-currencySymbol">$</span>42.00</span></del>
-                                        <ins><span><span
-                                                class="woocommerce-Price-currencySymbol">$</span>38.00</span></ins>
-                                    </span>
-                            </div>
-                            <div class="sp-details-hover">
-                                <a class="sp-cart" href="#"><i class="twi-cart-plus"></i><span>Add to cart</span></a>
-                                <a class="sp-wishlist" href="#"><i class="twi-heart2"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="single-shop-product">
-                        <div class="sp-thumb">
-                            <img src="{% static "images/shop/11.jpg" %}" alt="" class="">
-                            <div class="pro-badge">
-                                <p class="hot">Hot</p>
-                            </div>
-                        </div>
-                        <div class="sp-details">
-                            <h4>Wireless Headset</h4>
-                            <div class="product-price clearfix">
-                                    <span class="price">
-                                        <span><span class="woocommerce-Price-currencySymbol">$</span>122.00</span>
-                                    </span>
-                            </div>
-                            <div class="sp-details-hover">
-                                <a class="sp-cart" href="#"><i class="twi-cart-plus"></i><span>Add to cart</span></a>
-                                <a class="sp-wishlist" href="#"><i class="twi-heart2"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="single-shop-product">
-                        <div class="sp-thumb">
-                            <img src="{% static "images/shop/12.jpg" %}" alt="" class="">
-                        </div>
-                        <div class="sp-details">
-                            <h4>Gaming Controller</h4>
-                            <div class="product-price clearfix">
-                                    <span class="price">
-                                        <del><span><span
-                                                class="woocommerce-Price-currencySymbol">$</span>42.00</span></del>
-                                        <ins><span><span
-                                                class="woocommerce-Price-currencySymbol">$</span>38.00</span></ins>
-                                    </span>
-                            </div>
-                            <div class="sp-details-hover">
-                                <a class="sp-cart" href="#"><i class="twi-cart-plus"></i><span>Add to cart</span></a>
-                                <a class="sp-wishlist" href="#"><i class="twi-heart2"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="single-shop-product">
-                        <div class="sp-thumb">
-                            <img src="{% static "images/shop/13.jpg" %}" alt="" class="">
-                        </div>
-                        <div class="sp-details">
-                            <h4>Camera Lens</h4>
-                            <div class="product-price clearfix">
-                                    <span class="price">
-                                        <del><span><span
-                                                class="woocommerce-Price-currencySymbol">$</span>42.00</span></del>
-                                        <ins><span><span
-                                                class="woocommerce-Price-currencySymbol">$</span>38.00</span></ins>
-                                    </span>
-                            </div>
-                            <div class="sp-details-hover">
-                                <a class="sp-cart" href="#"><i class="twi-cart-plus"></i><span>Add to cart</span></a>
-                                <a class="sp-wishlist" href="#"><i class="twi-heart2"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="single-shop-product">
-                        <div class="sp-thumb">
-                            <img src="{% static "images/shop/14.jpg" %}" alt="" class="">
-                            <div class="pro-badge">
-                                <p class="sale">Sale</p>
-                            </div>
-                        </div>
-                        <div class="sp-details">
-                            <h4>LED TV</h4>
-                            <div class="product-price clearfix">
-                                    <span class="price">
-                                        <del><span><span
-                                                class="woocommerce-Price-currencySymbol">$</span>42.00</span></del>
-                                        <ins><span><span
-                                                class="woocommerce-Price-currencySymbol">$</span>38.00</span></ins>
-                                    </span>
-                            </div>
-                            <div class="sp-details-hover">
-                                <a class="sp-cart" href="#"><i class="twi-cart-plus"></i><span>Add to cart</span></a>
-                                <a class="sp-wishlist" href="#"><i class="twi-heart2"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="single-shop-product">
-                        <div class="sp-thumb">
-                            <img src="{% static "images/shop/8.jpg" %}" alt="" class="">
-                            <div class="pro-badge">
-                                <p class="hot">Hot</p>
-                            </div>
-                        </div>
-                        <div class="sp-details">
-                            <h4>Wirless Headset</h4>
-                            <div class="product-price clearfix">
-                                    <span class="price">
-                                        <span><span class="woocommerce-Price-currencySymbol">$</span>122.00</span>
-                                    </span>
-                            </div>
-                            <div class="sp-details-hover">
-                                <a class="sp-cart" href="#"><i class="twi-cart-plus"></i><span>Add to cart</span></a>
-                                <a class="sp-wishlist" href="#"><i class="twi-heart2"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="single-shop-product">
-                        <div class="sp-thumb">
-                            <img src="{% static "images/shop/4.jpg" %}" alt="" class="">
-                        </div>
-                        <div class="sp-details">
-                            <h4>Black Drone</h4>
-                            <div class="product-price clearfix">
-                                    <span class="price">
-                                        <del><span><span
-                                                class="woocommerce-Price-currencySymbol">$</span>42.00</span></del>
-                                        <ins><span><span
-                                                class="woocommerce-Price-currencySymbol">$</span>38.00</span></ins>
-                                    </span>
-                            </div>
-                            <div class="sp-details-hover">
-                                <a class="sp-cart" href="#"><i class="twi-cart-plus"></i><span>Add to cart</span></a>
-                                <a class="sp-wishlist" href="#"><i class="twi-heart2"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="single-shop-product">
-                        <div class="sp-thumb">
-                            <img src="{% static "images/shop/3.jpg" %}" alt="" class="">
-                        </div>
-                        <div class="sp-details">
-                            <h4>Bluetooth Earphones</h4>
-                            <div class="product-price clearfix">
-                                    <span class="price">
-                                        <del><span><span
-                                                class="woocommerce-Price-currencySymbol">$</span>42.00</span></del>
-                                        <ins><span><span
-                                                class="woocommerce-Price-currencySymbol">$</span>38.00</span></ins>
-                                    </span>
-                            </div>
-                            <div class="sp-details-hover">
-                                <a class="sp-cart" href="#"><i class="twi-cart-plus"></i><span>Add to cart</span></a>
-                                <a class="sp-wishlist" href="#"><i class="twi-heart2"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-10 offset-lg-1 col-md-12 mt-20">
-                    <div class="goru-pagination text-center clearfix">
-                        <a class="prev" href="#"><i class="twi-long-arrow-alt-left"></i></a>
-                        <span class="current">1</span>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#">4</a>
-                        <a href="#">5</a>
-                        <a class="next" href="#"><i class="twi-long-arrow-alt-right"></i></a>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </section>

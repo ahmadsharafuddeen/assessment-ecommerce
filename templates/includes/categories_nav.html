@@ -1,21 +1,17 @@
 <div class="row">
-    <div class="col-md-7">
+    <div class="col-md-8">
         <div class="product-cate">
             <h5>Categories</h5>
             <ul>
-                <li><a class="active" href="#">All</a></li>
-                <li><a href="#">Smartphones</a></li>
-                <li><a href="#">Computers</a></li>
-                <li><a href="#">Cameras</a></li>
-                <li><a href="#">On Sale</a></li>
-                <li><a href="#">Others</a></li>
+                <li><a class="active" href="{% url "store:store"  %}">All</a></li>
+                {% for category in categories %}
+                <li><a href="{% url "store:products_by_category" category.slug  %}">{{ category.category_name }}</a></li>
+                {% endfor %}
             </ul>
         </div>
     </div>
-    <div class="col-md-5">
+    <div class="col-md-4">
         <div class="sort-view">
-            <a class="view-mode active" href="#"><i class="twi-th"></i></a>
-            <a class="view-mode" href="#"><i class="twi-bars"></i></a>
             <div class="sorts">
                 <select name="sort">
                     <option value="">Default Sorting</option>
