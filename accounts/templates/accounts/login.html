@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+    <!-- Login Register Section Start -->
+        <section class="login-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <h3 class="sec-title">Login your account</h3>
+                        <p class="sec-desc">
+                            Login to your account to discovery all great features in this item
+                        </p>
+                        <div class="login-form">
+                            <form action="#" method="post">
+                                <input type="text" name="name" placeholder="User Name">
+                                <input type="password" name="password" placeholder="Your Password">
+                                <div class="keep-log-regi">
+                                    <input type="radio" id="login" name="login" value="keep-login">
+                                    <label for="login">Keep me logged in</label>
+                                </div>
+                                <a href="#">Forgot your password?</a>
+                                <input type="submit" name="submit" value="login">
+                            </form>
+                        </div>
+                        <div class="social-log-regi">
+                            <h5>OR LOGIN WITH</h5>
+                            <a href="#"><i class="twi-facebook-f"></i></a>
+                            <a href="#"><i class="twi-twitter"></i></a>
+                            <a href="#"><i class="twi-google-plus-g"></i></a>
+                            <a href="#"><i class="twi-instagram"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <h3 class="sec-title">Register account now</h3>
+                        <p class="sec-desc">
+                            Pellentesque habitant morbi tristique senectus et netus et
+                        </p>
+                        <div class="register-form">
+                            <form action="#" method="post">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <input type="text" name="full-name" placeholder="Your Name">
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input type="text" name="name" placeholder="User Name">
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input type="number" name="phone" placeholder="Phone">
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input type="email" name="email" placeholder="Email">
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input type="password" name="password" placeholder="Password">
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input type="password" name="retype-password" placeholder="Re Password">
+                                    </div>
+                                </div>
+                                <div class="keep-log-regi">
+                                    <input type="radio" id="register" name="register" value="keep-register">
+                                    <label for="register">
+                                        I accept the terms and conditions, including the Privacy Policy
+                                    </label>
+                                </div>
+                                <input type="submit" name="submit" value="register">
+                            </form>
+                        </div>
+                        <div class="social-log-regi">
+                            <h5>OR Register WITH</h5>
+                            <a href="#"><i class="twi-facebook-f"></i></a>
+                            <a href="#"><i class="twi-twitter"></i></a>
+                            <a href="#"><i class="twi-google-plus-g"></i></a>
+                            <a href="#"><i class="twi-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Login Register Section End -->
+
+
+{#    <!-- ========================= SECTION CONTENT ========================= -->#}
+{#    <section class="section-content padding-y">#}
+{##}
+{#        <!-- ============================ COMPONENT REGISTER   ================================= -->#}
+{#        <div class="card mx-auto" style="max-width:520px; margin-top:40px;">#}
+{#            <article class="card-body">#}
+{#                {% include "includes/alerts.html" %}#}
+{#                <header class="mb-4"><h4 class="card-title">Sign up</h4></header>#}
+{#                <form action="{% url "register" %}" method="post">#}
+{#                    {% csrf_token %}#}
+{##}
+{#                    <div class="form-row">#}
+{#                        <div class="col form-group">#}
+{#                            <label>First name</label>#}
+{#                            {{ form.first_name }}#}
+{#                        </div> <!-- form-group end.// -->#}
+{#                        <div class="col form-group">#}
+{#                            <label>Last name</label>#}
+{#                            {{ form.last_name }}#}
+{#                        </div> <!-- form-group end.// -->#}
+{#                    </div> <!-- form-row end.// -->#}
+{#                    <div class="form-row">#}
+{#                        <div class="form-group col-md-6">#}
+{#                            <label>Email Address</label>#}
+{#                            {{ form.email }}#}
+{#                        </div> <!-- form-group end.// -->#}
+{#                        <div class="form-group col-md-6">#}
+{#                            <label>Phone Number</label>#}
+{#                            {{ form.phone_number }}#}
+{#                        </div> <!-- form-group end.// -->#}
+{#                    </div> <!-- form-row.// -->#}
+{#                    <div class="form-row">#}
+{#                        <div class="form-group col-md-6">#}
+{#                            <label>Create password</label>#}
+{#                            {{ form.password }}#}
+{#                        </div> <!-- form-group end.// -->#}
+{#                        <div class="form-group col-md-6">#}
+{#                            <label>Repeat password</label>#}
+{#                            {{ form.confirm_password }}#}
+{#                        </div> <!-- form-group end.// -->#}
+{#                    </div>#}
+{#                    {{ form.email.errors }}#}
+{#                    {{ form.non_field_errors }}#}
+{#                    <div class="form-group">#}
+{#                        <button type="submit" class="btn btn-primary btn-block"> Register</button>#}
+{#                    </div> <!-- form-group// -->#}
+{##}
+{#                </form>#}
+{#            </article><!-- card-body.// -->#}
+{#        </div> <!-- card .// -->#}
+{#        <p class="text-center mt-4">Have an account? <a href="{% url "login" %}">Log In</a></p>#}
+{#        <br><br>#}
+{#        <!-- ============================ COMPONENT REGISTER  END.// ================================= -->#}
+{##}
+{##}
+{#    </section>#}
+    <!-- ========================= SECTION CONTENT END// ========================= -->
+{% endblock %}

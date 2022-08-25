@@ -8,6 +8,8 @@ django = "*"
 psycopg2 = "*"
 python-dotenv = "*"
 gunicorn = "*"
+requests = "*"
+pillow = "*"
 
 [dev-packages]
 
