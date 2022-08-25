@@ -28,6 +28,6 @@ urlpatterns = [
     path('cart/', include('carts.urls', namespace="carts")),
     path('', HomePageView.as_view(), name='home'),
     path('contact/', ContactUsPageView.as_view(), name="contact")
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 handler404 = "ats_ecommerce.views.page_not_found_view"
