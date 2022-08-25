@@ -25,4 +25,4 @@ urlpatterns = [
     path('store/', include('store.urls', namespace="store")),
     path('cart/', include('carts.urls', namespace="carts")),
     path('', HomePageView.as_view(), name='home'),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
