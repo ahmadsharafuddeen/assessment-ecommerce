@@ -10,6 +10,7 @@ python-dotenv = "*"
 gunicorn = "*"
 requests = "*"
 pillow = "*"
+whitenoise = "*"
 
 [dev-packages]
 
