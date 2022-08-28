@@ -53,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware'
 ]
 
 ROOT_URLCONF = 'ats_ecommerce.urls'
@@ -130,6 +131,7 @@ STATICFILES_DIRS = [
     BASE_DIR / "ats_ecommerce" / "static"
 ]
 STATIC_ROOT = BASE_DIR /  'staticfiles'
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 
 # media files configuration
