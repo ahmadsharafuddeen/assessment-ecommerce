@@ -11,9 +11,8 @@ class HomePageView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(HomePageView, self).get_context_data(**kwargs)
-        context["categories"] = Category.objects.all()
         context["products"] = Product.objects.filter(is_available=True,
-                                                     price__lt=150000). \
+                                                     price__lt=5000). \
             order_by("-created_date")
         return context
 

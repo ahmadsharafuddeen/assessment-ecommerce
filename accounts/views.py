@@ -82,10 +82,7 @@ class ActivateUserView(View):
 
 class UserLoginView(View):
     def get(self, request):
-        context = {
-            "categories": Category.objects.all()
-        }
-        return render(request, "accounts/login.html", context)
+        return render(request, "accounts/login.html")
 
     def post(self, request):
         email = request.POST["email"]
@@ -142,11 +139,7 @@ class UserLoginView(View):
         else:
             messages.error(request, "Invalid login credentials")
             return redirect("accounts:login")
-
-        context = {
-            "categories": Category.objects.all()
-        }
-        return render(request, "accounts/login.html", context)
+        return render(request, "accounts/login.html")
 
 
 class ForgotPasswordView(View):
@@ -179,7 +172,7 @@ class ForgotPasswordView(View):
 
 
 class PasswordResetValidateView(View):
-    def post(self, request, uidb64, token):
+    def get(self, request, uidb64, token):
         try:
             uid = urlsafe_base64_decode(uidb64).decode()
             user = Account._default_manager.get(pk=uid)
@@ -190,7 +183,7 @@ class PasswordResetValidateView(View):
         if user is not None and default_token_generator.check_token(user, token):
             request.session["uid"] = uid
             messages.success(request, "Please reset your password")
-            return redirect("resetPassword")
+            return redirect("accounts:resetPassword")
         else:
             messages.error(request, "This link is expired!")
             return redirect("accounts:login")
@@ -210,7 +203,7 @@ class PasswordResetView(View):
             user.set_password(password)
             user.save()
             messages.success(request, "Password reset successful")
-            return redirect("login")
+            return redirect("accounts:login")
         else:
             messages.error(request, "Password do not match")
             return redirect("resetPassword")

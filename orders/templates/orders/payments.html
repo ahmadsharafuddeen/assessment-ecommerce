@@ -2,7 +2,22 @@
 {% load static %}
 
 {% block content %}
-    <section class="section-content padding-y bg">
+    <!-- Banner Start -->
+    <section class="page-banner mb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <span class="round-shape"></span>
+                    <h2 class="banner-title">Payment</h2>
+                    <div class="bread-crumb"><a href="{% url "home" %}">Home</a> / <a
+                            href="{% url "carts:cart" %}">Cart</a> / Payment
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Banner End -->
+    <section class="section-content padding-y bg mb-5">
         <div class="container">
 
             <!-- ============================ COMPONENT 1 ================================= -->
@@ -43,38 +58,41 @@
                                 <tbody>
 
                                 {% for cart_item in cart_items %}
-                                    <tr>
-                                        <td>
-                                            <figure class="itemside align-items-center">
-                                                <div class="aside"><img src="{{ cart_item.product.image.url }}"
-                                                                        class="img-sm">
-                                                </div>
-                                                <figcaption class="info">
-                                                    <a href="{{ cart_item.product.get_absolute_url }}"
-                                                       class="title text-dark">{{ cart_item.product.product_name }}</a>
-                                                    <p class="text-muted small">
-                                                        {% if cart_item.variations.all %}
-                                                            {% for item in cart_item.variations.all %}
-                                                                {{ item.variation_category |capfirst }} :
-                                                                {{ item.variation_value |capfirst }} <br>
-                                                            {% endfor %}
-                                                        {% endif %}
-                                                    </p>
-                                                </figcaption>
-                                            </figure>
-                                        </td>
-                                        <td>
-                                            <!-- col.// -->
-                                            <label for="">{{ cart_item.quantity }}</label>
-                                        </td>
-                                        <td>
-                                            <div class="price-wrap">
-                                                <var class="price">${{ cart_item.sub_total }}</var>
-                                                <small class="text-muted"> ${{ cart_item.product.price }}
-                                                    each </small>
-                                            </div> <!-- price-wrap .// -->
-                                        </td>
-                                    </tr>
+                                    {% if cart_item.quantity > 0 %}
+                                        <tr>
+                                            <td>
+                                                <figure class="itemside align-items-center">
+                                                    <div class="aside">
+                                                        <a href="{% url "store:product_detail" cart_item.product.category.slug cart_item.product.slug %}">
+                                                            <img src="{{ cart_item.product.image.url }}" class="img-fluid"></a>
+                                                    </div>
+                                                    <figcaption class="info">
+                                                        <a href="{{ cart_item.product.get_absolute_url }}"
+                                                           class="title text-dark">{{ cart_item.product.product_name }}</a>
+                                                        <p class="text-muted small">
+                                                            {% if cart_item.variations.all %}
+                                                                {% for item in cart_item.variations.all %}
+                                                                    {{ item.variation_category |capfirst }} :
+                                                                    {{ item.variation_value |capfirst }} <br>
+                                                                {% endfor %}
+                                                            {% endif %}
+                                                        </p>
+                                                    </figcaption>
+                                                </figure>
+                                            </td>
+                                            <td>
+                                                <!-- col.// -->
+                                                <label for="">{{ cart_item.quantity }}</label>
+                                            </td>
+                                            <td>
+                                                <div class="price-wrap">
+                                                    <var class="price">{{ cart_item.sub_total }}</var>
+                                                    <small class="text-muted"> ₦{{ cart_item.product.price }}
+                                                        each </small>
+                                                </div> <!-- price-wrap .// -->
+                                            </td>
+                                        </tr>
+                                    {% endif %}
                                 {% endfor %}
                                 </tbody>
                             </table>
@@ -88,19 +106,19 @@
                         <div class="card-body">
                             <dl class="dlist-align">
                                 <dt>Total price:</dt>
-                                <dd class="text-right">${{ total }}</dd>
+                                <dd class="text-right">₦{{ total }}</dd>
                             </dl>
                             <dl class="dlist-align">
-                                <dt>Tax:</dt>
-                                <dd class="text-right"> ${{ tax }}</dd>
+                                <dt>Shipping:</dt>
+                                <dd class="text-right"> ₦{{ tax }}</dd>
                             </dl>
                             <dl class="dlist-align">
                                 <dt>Grand Total:</dt>
-                                <dd class="text-right text-dark b"><strong>${{ grand_total }}</strong></dd>
+                                <dd class="text-right text-dark b"><strong>₦{{ grand_total }}</strong></dd>
                             </dl>
                             <hr>
                             <p class="text-center mb-3">
-                                <img src="{% static "images/misc/payments.png" %}" height="26">
+                                <img src="{% static "images/payments.png" %}" height="26">
                             </p>
                             <div id="paypal-button-container"></div>
                         </div> <!-- card-body.// -->
@@ -133,23 +151,23 @@
         }
 
         // Render the PayPal button into #paypal-button-container
-
-        let amount = {{ grand_total }};
-        let url = "{% url "payments" %}";
+        let amount = {{ dollar_amount }};
+        let url = "{% url "orders:payments" %}";
         let order_id = "{{ order.order_number }}";
         let payment_method = "PayPal";
+        let redirect_url = "{% url "orders:order_complete" %}"
 
         paypal.Buttons({
 
             style: {
-                color:  'blue',
-                shape:  'rect',
-                label:  'pay',
+                color: 'blue',
+                shape: 'rect',
+                label: 'pay',
                 height: 40
             },
 
             // Set up the transaction
-            createOrder: function(data, actions) {
+            createOrder: function (data, actions) {
                 return actions.order.create({
                     purchase_units: [{
                         amount: {
@@ -160,13 +178,14 @@
             },
 
             // Finalize the transaction
-            onApprove: function(data, actions) {
-                return actions.order.capture().then(function(orderData) {
+            onApprove: function (data, actions) {
+                return actions.order.capture().then(function (orderData) {
                     // Successful capture! For demo purposes:
                     console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
                     var transaction = orderData.purchase_units[0].payments.captures[0];
 
                     sendData()
+
                     function sendData() {
                         fetch(url, {
                             method: "POST",
@@ -183,14 +202,12 @@
 
                             }),
                         })
-                        {#.then(response => response.json())#}
-                        {#.then(console.log(data))#}
+                            .then(response => response.json())
+                            .then(data => {
+                                window.location.href = redirect_url + "?order_number=" + data.order_number
+                                    + "&payment_id=" + data.transID
+                            });
                     }
-                    // Replace the above to show a success message within this page, e.g.
-                    // const element = document.getElementById('paypal-button-container');
-                    // element.innerHTML = '';
-                    // element.innerHTML = '<h3>Thank you for your payment!</h3>';
-                    // Or go to another URL:  actions.redirect('thank_you.html');
                 });
             }
 

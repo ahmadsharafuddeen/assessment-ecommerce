@@ -24,7 +24,7 @@
                             <a href="javascript:void(0);">Categories</a>
                             <ul class="sub-menu">
                                 <li><a href="{% url "store:store" %}">All</a></li>
-                                {% for category in categories %}
+                                {% for category in links %}
                                     <li>
                                         <a href="{% url "store:products_by_category" category.slug %}">{{ category.category_name }}</a>
                                     </li>
@@ -43,10 +43,10 @@
                         <a class="user-login" href="#">Dashboard</a>
                         <a class="user-login" href="{% url "accounts:logout" %}">Logout</a>
                         <a class="user-login" href="#">{{ request.user.username }}</a>
-                        <a class="carts" href="{% url "carts:cart" %}"><span>{{ cart_count }}</span><img src="{% static "images/cart.png" %}" alt=""></a>
+                        <a class="carts" href="{% url "carts:cart" %}"><span id="cart_counter">{{ cart_count }}</span><img src="{% static "images/cart.png" %}" alt=""></a>
                     {% else %}
                         <a class="user-login" href="{% url "accounts:logout" %}">login</a>
-                        <a class="carts" href="{% url "carts:cart" %}"><span>{{ cart_count }}</span><img src="{% static "images/cart.png" %}" alt=""></a>
+                        <a class="carts" href="{% url "carts:cart" %}"><span id="cart_counter">{{ cart_count }}</span><img src="{% static "images/cart.png" %}" alt=""></a>
                     {% endif %}
                 </div>
             </div>

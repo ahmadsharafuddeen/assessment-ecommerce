@@ -24,6 +24,9 @@
     <link rel="stylesheet" href="{% static "css/ignore_in_wp.css" %}"/>
     <link rel="stylesheet" href="{% static "css/theme.css" %}"/>
     <link rel="stylesheet" href="{% static "css/responsive.css" %}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
 
     {% block css_files %}
     {% endblock %}
@@ -51,5 +54,7 @@
 {% endblock %}
 
 {% include "includes/footer.html" %}
+{% block scripts %}
+{% endblock %}
 </body>
 </html>
