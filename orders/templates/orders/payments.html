@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block script_links %}
+<script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
+{% endblock %}
+
 {% block content %}
     <!-- Banner Start -->
     <section class="page-banner mb-5">

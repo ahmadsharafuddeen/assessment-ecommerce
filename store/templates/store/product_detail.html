@@ -54,17 +54,21 @@
                         <div class="sin-product-details">
                             <h3>{{ product.product_name|title }}</h3>
                             <div class="woocommerce-product-rating">
-                                <div class="star-rating">
-                                    <i class="twi-star"></i>
-                                    <i class="twi-star"></i>
-                                    <i class="twi-star"></i>
-                                    <i class="twi-star"></i>
+                                <div class="rating-star">
                                     <span>
-                                        <i class="twi-star"></i>
+                                              <i class="fa fa-star{% if product.averageReview < 0.5 %}-o{% elif product.averageReview >= 0.5 and product.averageReview < 1 %}-half-o"{% endif %}
+                                                 aria-hidden="true"></i>
+                                              <i class="fa fa-star{% if product.averageReview < 1.5 %}-o{% elif product.averageReview >= 1.5 and product.averageReview < 2 %}-half-o"{% endif %}
+                                                 aria-hidden="true"></i>
+                                              <i class="fa fa-star{% if product.averageReview < 2.5 %}-o{% elif product.averageReview >= 2.5 and product.averageReview < 3 %}-half-o"{% endif %}
+                                                 aria-hidden="true"></i>
+                                              <i class="fa fa-star{% if product.averageReview < 3.5 %}-o{% elif product.averageReview >= 3.5 and product.averageReview < 4 %}-half-o"{% endif %}
+                                                 aria-hidden="true"></i>
+                                              <i class="fa fa-star{% if product.averageReview < 4.5 %}-o{% elif product.averageReview >= 4.5 and product.averageReview < 5 %}-half-o"{% endif %}
+                                                 aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <a href="#" class="woocommerce-review-link"><span class="count">03</span> customer
-                                    reviews
+                                <a href="#" class="woocommerce-review-link"><span class="count">{{ reviews.count }}</span> customer reviews
                                 </a>
                             </div>
                             <div class="product-price clearfix">
@@ -143,6 +147,20 @@
                                 <div class="comment-area">
                                     <h4 class="comment-title">{{ reviews.count }} Reviews to
                                         “{{ product.product_name|title }}”</h4>
+                                    <div class="rating-star">
+                                          <span>
+                                              <i class="fa fa-star{% if product.averageReview < 0.5 %}-o{% elif product.averageReview >= 0.5 and product.averageReview < 1 %}-half-o"{% endif %}
+                                                 aria-hidden="true"></i>
+                                              <i class="fa fa-star{% if product.averageReview < 1.5 %}-o{% elif product.averageReview >= 1.5 and product.averageReview < 2 %}-half-o"{% endif %}
+                                                 aria-hidden="true"></i>
+                                              <i class="fa fa-star{% if product.averageReview < 2.5 %}-o{% elif product.averageReview >= 2.5 and product.averageReview < 3 %}-half-o"{% endif %}
+                                                 aria-hidden="true"></i>
+                                              <i class="fa fa-star{% if product.averageReview < 3.5 %}-o{% elif product.averageReview >= 3.5 and product.averageReview < 4 %}-half-o"{% endif %}
+                                                 aria-hidden="true"></i>
+                                              <i class="fa fa-star{% if product.averageReview < 4.5 %}-o{% elif product.averageReview >= 4.5 and product.averageReview < 5 %}-half-o"{% endif %}
+                                                 aria-hidden="true"></i>
+                                          </span>
+                                    </div>
                                     <ol class="comment-list">
                                         {% for review in reviews %}
                                             <li>
@@ -155,11 +173,16 @@
                                                     <div class="comment">
                                                         <div class="rating-star">
                                                             <span>
-                                                                <i class="fa fa-star{% if review.rating == 0.5 %}-half-o{% elif review.rating < 1 %}-o"{% endif %} aria-hidden="true"></i>
-                                                                <i class="fa fa-star{% if review.rating == 1.5 %}-half-o{% elif review.rating < 2 %}-o"{% endif %} aria-hidden="true"></i>
-                                                                <i class="fa fa-star{% if review.rating == 2.5 %}-half-o{% elif review.rating < 3 %}-o"{% endif %} aria-hidden="true"></i>
-                                                                <i class="fa fa-star{% if review.rating == 3.5 %}-half-o{% elif review.rating < 4 %}-o"{% endif %} aria-hidden="true"></i>
-                                                                <i class="fa fa-star{% if review.rating == 4.5 %}-half-o{% elif review.rating < 5 %}-o"{% endif %} aria-hidden="true"></i>
+                                                                <i class="fa fa-star{% if review.rating == 0.5 %}-half-o{% elif review.rating < 1 %}-o"{% endif %}
+                                                                   aria-hidden="true"></i>
+                                                                <i class="fa fa-star{% if review.rating == 1.5 %}-half-o{% elif review.rating < 2 %}-o"{% endif %}
+                                                                   aria-hidden="true"></i>
+                                                                <i class="fa fa-star{% if review.rating == 2.5 %}-half-o{% elif review.rating < 3 %}-o"{% endif %}
+                                                                   aria-hidden="true"></i>
+                                                                <i class="fa fa-star{% if review.rating == 3.5 %}-half-o{% elif review.rating < 4 %}-o"{% endif %}
+                                                                   aria-hidden="true"></i>
+                                                                <i class="fa fa-star{% if review.rating == 4.5 %}-half-o{% elif review.rating < 5 %}-o"{% endif %}
+                                                                   aria-hidden="true"></i>
                                                             </span>
                                                         </div>
                                                         <p>

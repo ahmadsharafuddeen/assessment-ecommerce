@@ -11,6 +11,9 @@ gunicorn = "*"
 requests = "*"
 pillow = "*"
 whitenoise = "*"
+django-mptt = "*"
+django-storages = "*"
+boto = "*"
 
 [dev-packages]
 
