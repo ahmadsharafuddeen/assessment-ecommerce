@@ -126,16 +126,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-# static files configuration
-STATIC_URL = 'static/'
-STATICFILES_DIRS = [
-    BASE_DIR / "ats_ecommerce" / "static"
-]
-STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-# media files configuration
-MEDIA_URL = "/media/"
-MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -155,7 +146,24 @@ AWS_QUERYSTRING_AUTH = False
 AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.getenv('aws_secret_access_key')
 AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
-# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+
+# static files configuration
+AWS_LOCATION = 'static'
+STATICFILES_DIRS = [
+    BASE_DIR / "ats_ecommerce" / "static"
+]
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+DEFAULT_FILE_STORAGE = 'ats_ecommerce.storage_backends.MediaStorage'
+
+# media files configuration
+MEDIA_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # SMTP configuration
 EMAIL_HOST = "smtp.mailtrap.io"

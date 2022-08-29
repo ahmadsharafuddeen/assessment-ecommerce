@@ -14,6 +14,7 @@ whitenoise = "*"
 django-mptt = "*"
 django-storages = "*"
 boto = "*"
+boto3 = "*"
 
 [dev-packages]
 
