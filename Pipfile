@@ -10,11 +10,14 @@ python-dotenv = "*"
 gunicorn = "*"
 requests = "*"
 pillow = "*"
-whitenoise = "*"
 django-mptt = "*"
 django-storages = "*"
 boto = "*"
 boto3 = "*"
+install = "*"
+"django.utils.six" = "*"
+pip = "*"
+django-elasticsearch-dsl = "*"
 
 [dev-packages]
 

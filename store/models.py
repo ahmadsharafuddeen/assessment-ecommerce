@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models import Avg
 from django.shortcuts import reverse
+
 from category.models import Category
 from accounts.models import Account
 

@@ -62,7 +62,7 @@
                             <div class="col-lg-4 col-md-6">
                                 <div class="single-shop-product">
                                     <div class="sp-thumb">
-                                        <a href="{{ product.get_absolute_url }}"><img src="{{ product.image.url }}"
+                                        <a href="{% url "store:product_detail" product.category.slug product.slug %}"><img src="{{ product.image }}"
                                                                                       alt="" class=""></a>
                                         <div class="pro-badge">
                                             <p class="sale">Sale</p>
@@ -92,31 +92,31 @@
                         {% endfor %}
                     </div>
                     <div class="row">
-                        {% if products.has_other_pages %}
-                            <div class="col-lg-10 offset-lg-1 col-md-12 mt-20">
-                                <div class="goru-pagination text-center clearfix">
-                                    {% if products.has_previous %}
-                                        <a class="prev" href="?page={{ product.previous_page_number }}"><i
-                                                class="twi-long-arrow-alt-left"></i></a>
-                                    {% else %}
-                                        <a class="prev" href="#"><i class="twi-long-arrow-alt-left"></i></a>
-                                    {% endif %}
-                                    {% for i in products.paginator.page_range %}
-                                        {% if products.number == i %}
-                                            <span class="current">{{ i }}</span>
-                                        {% else %}
-                                            <a href="?page={{ i }}">{{ i }}</a>
-                                        {% endif %}
-                                    {% endfor %}
-                                    {% if products.has_next %}
-                                        <a class="next" href="?page={{ products.next_page_number }}"><i
-                                                class="twi-long-arrow-alt-right"></i></a>
-                                    {% else %}
-                                        <a class="next" href="#"><i class="twi-long-arrow-alt-right"></i></a>
-                                    {% endif %}
-                                </div>
-                            </div>
-                        {% endif %}
+{#                        {% if products.has_other_pages %}#}
+{#                            <div class="col-lg-10 offset-lg-1 col-md-12 mt-20">#}
+{#                                <div class="goru-pagination text-center clearfix">#}
+{#                                    {% if products.has_previous %}#}
+{#                                        <a class="prev" href="?page={{ product.previous_page_number }}"><i#}
+{#                                                class="twi-long-arrow-alt-left"></i></a>#}
+{#                                    {% else %}#}
+{#                                        <a class="prev" href="#"><i class="twi-long-arrow-alt-left"></i></a>#}
+{#                                    {% endif %}#}
+{#                                    {% for i in products.paginator.page_range %}#}
+{#                                        {% if products.number == i %}#}
+{#                                            <span class="current">{{ i }}</span>#}
+{#                                        {% else %}#}
+{#                                            <a href="?page={{ i }}">{{ i }}</a>#}
+{#                                        {% endif %}#}
+{#                                    {% endfor %}#}
+{#                                    {% if products.has_next %}#}
+{#                                        <a class="next" href="?page={{ products.next_page_number }}"><i#}
+{#                                                class="twi-long-arrow-alt-right"></i></a>#}
+{#                                    {% else %}#}
+{#                                        <a class="next" href="#"><i class="twi-long-arrow-alt-right"></i></a>#}
+{#                                    {% endif %}#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        {% endif %}#}
                     </div>
                 </div>
             </div>

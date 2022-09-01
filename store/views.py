@@ -5,6 +5,11 @@ from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 from django.views.generic import ListView, DetailView
+from elasticsearch import Elasticsearch
+
+from search.documents import CategoryDocument, ProductDocument
+from elasticsearch_dsl.query import MoreLikeThis
+from elasticsearch_dsl import Search
 
 from carts.models import CartItem
 from carts.views import _cart_id
@@ -69,24 +74,19 @@ class ProductDetailView(View):
 
 
 def search(request):
-    products = None
-    product_count = None
-    if 'keyword' in request.GET:
-        keyword = request.GET["keyword"]
-        print(keyword)
-        if keyword:
-            products = Product.objects.order_by("-created_date").filter(
-                Q(description__icontains=keyword) |
-                Q(product_name__icontains=keyword) |
-                Q(category__category_name__icontains=keyword)
-            )
-            product_count = products.count()
+    q = request.GET.get('q')
+    if q:
+        products = ProductDocument.search().query("match", product_name=q)
+        categories = CategoryDocument.search().query("match", categroy_name=q)
+    else:
+        products = ''
+        categories = ''
+
     context = {
         "products": products,
-        "product_count": product_count,
+        "categories": categories,
     }
-
-    return render(request, 'store/store.html', context)
+    return render(request, 'store/search_results.html', context)
 
 
 @login_required(login_url="accounts:login")
