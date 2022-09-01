@@ -109,19 +109,9 @@ def add_cart(request, product_id, selected_quantity=0):
                 except:
                     pass
 
-        try:
-            # cart = get_object_or_create()
-            cart = Cart.objects.get(cart_id=_cart_id(request))
-        except Cart.DoesNotExist:
-            cart = Cart.objects.create(
-                cart_id=_cart_id(request)
-            )
-            cart.save()
-
-        is_cart_item_exists = CartItem.objects.filter(product=product, cart=cart).exists()
-
-        if is_cart_item_exists:
-            cart_items = CartItem.objects.filter(product=product, cart=cart)
+        cart, _ = Cart.objects.get_or_create(cart_id=_cart_id(request))
+        cart_items = CartItem.objects.filter(product=product, cart=cart)
+        if cart_items.exists():
             # check if current variation is in existing variations
             existing_var_list = []
             cart_ids = []
