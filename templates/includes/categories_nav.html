@@ -3,9 +3,10 @@
         <div class="product-cate">
             <h5>Categories</h5>
             <ul>
-                <li><a class="active" href="{% url "store:store"  %}">All</a></li>
+                <li><a class="active" href="{% url "store:store" %}">All</a></li>
                 {% for category in categories %}
-                <li><a href="{% url "store:products_by_category" category.slug  %}">{{ category.category_name }}</a></li>
+                    <li><a href="{% url "store:products_by_category" category.slug %}">{{ category.category_name }}</a>
+                    </li>
                 {% endfor %}
             </ul>
         </div>
@@ -15,10 +16,12 @@
             <div class="sorts">
                 <select name="sort">
                     <option value="">Default Sorting</option>
-                    <option selected="selected" value="">low to high</option>
-                    <option value="">high to low</option>
-                    <option value="">Best Seller</option>
-                    <option value="">Popular Products</option>
+                    <form action="{% url "store:ascending" %}">
+                        <button type="submit">
+                            <option selected="selected" value="">low to high</option>
+                        </button>
+                    </form>
+                    <a href="{% url "store:descending" %}"> <option value="">high to low</option></a>
                 </select>
                 <i class="twi-angle-down1"></i>
             </div>

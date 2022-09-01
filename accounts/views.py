@@ -1,6 +1,7 @@
 import requests
 from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMessage
@@ -10,6 +11,7 @@ from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.views import View
+from django.views.generic import TemplateView
 
 from accounts.forms import RegistrationForm, UserProfileForm, UserForm
 from accounts.models import Account, UserProfile
@@ -218,23 +220,24 @@ def logout(request):
     return redirect("accounts:login")
 
 
-@login_required(login_url="accounts:login")
-def dashboard(request):
-    orders = Order.objects.order_by("-created_at").filter(user_id=request.user.id, is_ordered=True)
-    orders_count = orders.count()
-    context = {
-      "orders_count": orders_count
-    }
-    return render(request, "accounts/dashboard.html", context)
+class DashboardView(LoginRequiredMixin, TemplateView):
+    template_name = "accounts/dashboard.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(DashboardView, self).get_context_data(**kwargs)
+        orders = Order.objects.order_by("-created_at").filter(user_id=self.request.user.id, is_ordered=True)
+        context["orders"] = "orders"
+        context["orders_count"] = orders.count()
+        return context
 
 
-@login_required(login_url="accounts:login")
-def my_orders(request):
-    orders = Order.objects.filter(user=request.user, is_ordered=True).order_by("-created_at")
-    context = {
-        "orders": orders
-    }
-    return render(request, "accounts/my_orders.html", context)
+class MyOrdersView(LoginRequiredMixin, TemplateView):
+    template_name = "accounts/my_orders.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(MyOrdersView, self).get_context_data(**kwargs)
+        context["orders"] = Order.objects.filter(user=self.request.user, is_ordered=True).order_by("-created_at")
+        return context
 
 
 @login_required(login_url="accounts:login")
@@ -300,5 +303,3 @@ def order_detail(request, order_id):
     }
 
     return render(request, "accounts/order_detail.html", context)
-
-

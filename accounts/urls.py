@@ -7,8 +7,8 @@ from .views import (
     PasswordResetValidateView,
     PasswordResetView,
     logout,
-    dashboard,
-    my_orders,
+    DashboardView,
+    MyOrdersView,
     edit_profile,
     change_password,
     order_detail
@@ -18,8 +18,8 @@ urlpatterns = [
     path("register", RegisterUserView.as_view(), name="register"),
     path("login", UserLoginView.as_view(), name="login"),
     path("logout", logout, name="logout"),
-    path("",  dashboard, name="dashboard"),
-    path("my_orders", my_orders, name="my_orders"),
+    path("",  DashboardView.as_view(), name="dashboard"),
+    path("my_orders", MyOrdersView.as_view(), name="my_orders"),
     path("edit_profile", edit_profile, name="edit_profile"),
 
 

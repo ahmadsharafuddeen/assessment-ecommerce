@@ -78,12 +78,45 @@ def search(request):
     if q:
         products = ProductDocument.search().query("match", product_name=q)
         categories = CategoryDocument.search().query("match", categroy_name=q)
+        products_descending = ProductDocument.search().query("match", product_name=q).sort("-price")
     else:
         products = ''
         categories = ''
 
     context = {
         "products": products,
+        "categories": categories,
+    }
+    return render(request, 'store/search_results.html', context)
+
+
+def ascending(request):
+    q = request.GET.get('q')
+    if q:
+        categories = CategoryDocument.search().query("match", categroy_name=q)
+        products_descending = ProductDocument.search().query("match", product_name=q).sort("price")
+    else:
+        products_descending = ''
+        categories = ''
+
+    context = {
+        "products": products_descending,
+        "categories": categories,
+    }
+    return render(request, 'store/search_results.html', context)
+
+
+def descending(request):
+    q = request.GET.get('q')
+    if q:
+        categories = CategoryDocument.search().query("match", categroy_name=q)
+        products_descending = ProductDocument.search().query("match", product_name=q).sort("-price")
+    else:
+        products_descending = ''
+        categories = ''
+
+    context = {
+        "products": products_descending,
         "categories": categories,
     }
     return render(request, 'store/search_results.html', context)
