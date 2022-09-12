@@ -41,12 +41,12 @@
                                         <a href="{{ category.get_absolute_url }}">{{ category.category_name }}</a>
                                     </li>
                                 {% endfor %}
-{#                                <li>#}
-{#                                    <a href="{% url "store:ascending" %}">low to high</a>#}
-{#                                </li>#}
-{#                                <li>#}
-{#                                    <a href="{% url "store:ascending" %}">high to low</a>#}
-{#                                </li>#}
+                                {#                                <li>#}
+                                {#                                    <a href="{% url "store:ascending" %}">low to high</a>#}
+                                {#                                </li>#}
+                                {#                                <li>#}
+                                {#                                    <a href="{% url "store:ascending" %}">high to low</a>#}
+                                {#                                </li>#}
                             </ul>
                         </aside>
                         <aside class="widget">
@@ -83,8 +83,13 @@
                             </span>
                                         </div>
                                         <div class="sp-details-hover">
-                                            <a class="sp-cart" href="{% url "carts:add_cart" product.id %}"><i
-                                                    class="twi-cart-plus"></i><span>Add to cart</span></a>
+                                            {% if product.stock %}
+                                                <a class="sp-cart" href="{% url "carts:add_cart" product.id %}"><i
+                                                        class="twi-cart-plus"></i><span>Add to cart</span></a>
+                                            {% else %}
+                                                <a class="sp-cart" href="#"><i
+                                                        class="twi-cart-plus"></i><span>Not in stock</span></a>
+                                            {% endif %}
                                             <a class="sp-wishlist" href="#"><i class="twi-heart2"></i></a>
                                         </div>
                                     </div>

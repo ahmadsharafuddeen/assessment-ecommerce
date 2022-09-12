@@ -43,7 +43,7 @@ class StoreListAndCategoryView(View):
         return render(request, 'store/store.html', context)
 
 
-class ProductDetailView(View):
+class ProductDetailView(DetailView):
     def get(self, request, category_slug, product_slug, order_product=None):
         try:
             single_product = Product.objects.get(category__slug=category_slug, slug=product_slug)
@@ -77,8 +77,7 @@ def search(request):
     q = request.GET.get('q')
     if q:
         products = ProductDocument.search().query("match", product_name=q)
-        categories = CategoryDocument.search().query("match", categroy_name=q)
-        products_descending = ProductDocument.search().query("match", product_name=q).sort("-price")
+        categories = CategoryDocument.search().query("match", description=q)
     else:
         products = ''
         categories = ''

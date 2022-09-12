@@ -31,7 +31,7 @@ class CategoryDocument(Document):
         model = Category
         name_suggest = Completion()
         fields = [
-            'id', 'description', 'slug', 'category_img',
+            'id', 'description', 'slug', 'category_img'
         ]
 
 

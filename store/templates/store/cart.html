@@ -185,6 +185,7 @@
                     url: url,
                     data: data,
                     success: function (response) {
+                        console.log(response)
                         $("#cart_counter").html(response.cart_counter.cart_count)
                         $("#total").html(response.total)
                         $(".sub_total_" + cart_id).html(response.subtotal)
